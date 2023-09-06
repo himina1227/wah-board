@@ -1,0 +1,6 @@
+rootProject.name = 'wah'
+
+include ':wah-auth'
+include ':wah-board'
+include ':wah-batch'
+
