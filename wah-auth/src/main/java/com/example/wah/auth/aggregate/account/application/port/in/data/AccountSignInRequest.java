@@ -6,10 +6,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class AccountSignUpRequest {
-
-    private String name;
-
+public class AccountSignInRequest {
     private String email;
 
     private String password;
