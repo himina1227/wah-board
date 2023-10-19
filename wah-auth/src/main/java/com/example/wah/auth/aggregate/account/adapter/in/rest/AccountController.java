@@ -4,6 +4,7 @@ import com.example.wah.auth.aggregate.account.adapter.out.persistence.entity.Acc
 import com.example.wah.auth.aggregate.account.application.port.in.LoadAccountUseCase;
 import com.example.wah.auth.aggregate.account.application.port.in.SaveAccountUseCase;
 import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignInRequest;
+import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignInResponse;
 import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignUpRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +30,7 @@ public class AccountController {
 
     @Operation(summary = "user 로그인", description = "user 로그인시 사용합니다.")
     @PostMapping("/sign-in")
-    public Account signIn(@RequestBody AccountSignInRequest request) {
+    public AccountSignInResponse signIn(@RequestBody AccountSignInRequest request) {
         return loadAccountUseCase.signInByEmail(request);
     }
 }
