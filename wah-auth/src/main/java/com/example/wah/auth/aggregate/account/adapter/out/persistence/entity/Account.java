@@ -1,11 +1,10 @@
 package com.example.wah.auth.aggregate.account.adapter.out.persistence.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Builder
@@ -33,5 +32,16 @@ public class Account {
     @Builder.Default
     @Schema(description = "랭킹")
     private int rangKing = 0;
+
+    @Schema(description = "활성화 여부")
+    @Setter
+    private boolean activated;
+
+    @ManyToMany
+    @JoinTable(
+            name = "account_authority",
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
 
 }

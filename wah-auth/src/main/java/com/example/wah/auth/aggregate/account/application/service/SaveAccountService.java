@@ -16,7 +16,7 @@ public class SaveAccountService implements SaveAccountUseCase {
     private final SaveAccountPort saveAccountPort;
     public void signUpByEmail(AccountSignUpRequest request) {
 
-        Account newAccount = Account.builder().email(request.getEmail()).password(request.getPassword()).build();
+        Account newAccount = Account.builder().email(request.getEmail()).password(request.getPassword()).activated(true).build();
         saveAccountPort.save(newAccount);
 
     }

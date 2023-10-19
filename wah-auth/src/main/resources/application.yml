@@ -28,7 +28,8 @@ spring:
 jwt:
   header: Authorization
   secret: d2FoLWJvYXJkLXNwcmluZy1ib290LWp3dC1oZXhhZ29uYWwtc2VjcmVzdC13YWgtYm9hcmQtc3ByaW5nLWJvb3Qtand0LWhleGFnb25hbC1zZWNyZXN0
-  token-validity-in-seconds: 86400
+  access-expired-time: 3600000
+
 logging:
   level:
-    root: debug
+    com.example.wah.auth: DEBUG
