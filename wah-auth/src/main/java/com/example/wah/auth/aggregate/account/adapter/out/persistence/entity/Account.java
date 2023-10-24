@@ -2,6 +2,7 @@ package com.example.wah.auth.aggregate.account.adapter.out.persistence.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Set;
@@ -19,14 +20,17 @@ public class Account {
 
     @Schema(description = "이름", nullable = false, example = "김이름")
     @Setter
+    @NotBlank
     private String name;
 
     @Schema(description = "이메일", nullable = false, example = "abc@naver.com")
     @Setter
+    @NotBlank
     private String email;
 
     @Schema(description = "패스워드", nullable = false)
     @Setter
+    @NotBlank
     private String password;
 
     @Builder.Default
@@ -35,7 +39,8 @@ public class Account {
 
     @Schema(description = "활성화 여부")
     @Setter
-    private boolean activated;
+    @Builder.Default
+    private boolean activated = false;
 
     @ManyToMany
     @JoinTable(

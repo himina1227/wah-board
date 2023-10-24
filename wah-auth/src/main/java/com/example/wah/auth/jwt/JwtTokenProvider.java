@@ -12,12 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,6 +31,7 @@ public class JwtTokenProvider implements InitializingBean {
     @Value("${jwt.access-expired-time}")
     private long tokenValidityInMilliseconds;
     private Key key;
+    private String issuer = "Auth-Server";
 
 
     //@PostConstruct 가 Deprecated 되었다 java 9 이상을 사용할 경우 afterPropertiesSet() 사용
@@ -42,17 +42,18 @@ public class JwtTokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createToken(Authentication authentication) {
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+    public String createToken(UserDetails userDetails) {
 
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
+        Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
+        claims.put("roles", userDetails.getAuthorities());
+
         return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY,authorities)
+                .setIssuer(issuer)
+                .setIssuedAt(new Date())
+                .setClaims(claims)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();

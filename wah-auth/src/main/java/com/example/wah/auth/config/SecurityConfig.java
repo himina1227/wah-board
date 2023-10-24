@@ -44,6 +44,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/auth/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                         .anyRequest().authenticated())
                 // 세션을 사용하지 않기 때문에 STATELESS로 설정
                 .sessionManagement(sessionManagement ->

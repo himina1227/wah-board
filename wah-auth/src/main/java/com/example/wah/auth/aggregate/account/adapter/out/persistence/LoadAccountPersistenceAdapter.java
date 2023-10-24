@@ -13,7 +13,7 @@ public class LoadAccountPersistenceAdapter implements LoadAccountPort {
 
     private final AccountRepository repository;
     @Override
-    public Account loadAccount(AccountSignInRequest request) {
-        return repository.findByEmail(request.getEmail());
+    public Account loadAccount(String email) {
+        return repository.findByEmail(email);
     }
 }

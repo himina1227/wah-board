@@ -7,6 +7,7 @@ import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSi
 import com.example.wah.auth.aggregate.account.application.port.out.LoadAccountPort;
 import com.example.wah.auth.jwt.JwtTokenProvider;
 import com.example.wah.auth.util.PrincipalDetails;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ public class LoadAccountService implements LoadAccountUseCase {
     @Override
     public AccountSignInResponse signInByEmail(AccountSignInRequest request) {
 
-        Account account = loadAccountPort.loadAccount(request);
+        Account account = loadAccountPort.loadAccount(request.getEmail());
 
         UserDetails userDetails = PrincipalDetails
                 .builder()
@@ -37,6 +38,6 @@ public class LoadAccountService implements LoadAccountUseCase {
                         userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return AccountSignInResponse.of(jwtTokenProvider.createToken(authentication));
+        return AccountSignInResponse.of(jwtTokenProvider.createToken(userDetails));
     }
 }

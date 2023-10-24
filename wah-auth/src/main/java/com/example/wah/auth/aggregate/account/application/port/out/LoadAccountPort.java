@@ -4,5 +4,5 @@ import com.example.wah.auth.aggregate.account.adapter.out.persistence.entity.Acc
 import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignInRequest;
 
 public interface LoadAccountPort {
-    Account loadAccount(AccountSignInRequest request);
+    Account loadAccount(String email);
 }
