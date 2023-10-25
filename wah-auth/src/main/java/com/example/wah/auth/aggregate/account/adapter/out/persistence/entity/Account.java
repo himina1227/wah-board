@@ -13,31 +13,26 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 public class Account {
-    @Schema(description = "아이디")
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Schema(description = "이름", nullable = false, example = "김이름")
     @Setter
     @NotBlank
     private String name;
 
-    @Schema(description = "이메일", nullable = false, example = "abc@naver.com")
     @Setter
     @NotBlank
     private String email;
 
-    @Schema(description = "패스워드", nullable = false)
     @Setter
     @NotBlank
     private String password;
 
     @Builder.Default
-    @Schema(description = "랭킹")
     private int rangKing = 0;
 
-    @Schema(description = "활성화 여부")
     @Setter
     @Builder.Default
     private boolean activated = false;

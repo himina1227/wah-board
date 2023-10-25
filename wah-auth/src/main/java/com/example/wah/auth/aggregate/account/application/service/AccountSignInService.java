@@ -1,13 +1,12 @@
 package com.example.wah.auth.aggregate.account.application.service;
 
 import com.example.wah.auth.aggregate.account.adapter.out.persistence.entity.Account;
-import com.example.wah.auth.aggregate.account.application.port.in.LoadAccountUseCase;
+import com.example.wah.auth.aggregate.account.application.port.in.AccountSignInUseCase;
 import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignInRequest;
 import com.example.wah.auth.aggregate.account.application.port.in.data.AccountSignInResponse;
 import com.example.wah.auth.aggregate.account.application.port.out.LoadAccountPort;
 import com.example.wah.auth.jwt.JwtTokenProvider;
 import com.example.wah.auth.util.PrincipalDetails;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class LoadAccountService implements LoadAccountUseCase {
+public class AccountSignInService implements AccountSignInUseCase {
     private final LoadAccountPort loadAccountPort;
     private final JwtTokenProvider jwtTokenProvider;
     @Override

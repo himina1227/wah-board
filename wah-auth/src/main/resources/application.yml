@@ -25,15 +25,21 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
   mail:
-    host: smtp.example.com
-    port: 587
-    username: sunnylee3771@gmail.com
+    host: smtp.naver.com
+    port: 465
+    username:
+    password:
     properties:
       mail:
         smtp:
           auth: true
+          ssl:
+            enable: true
+            trust: smtp.naver.com
           starttls:
             enable: true
+            required: true
+    protocol: smtps
   cache:
     type: redis
   data:
